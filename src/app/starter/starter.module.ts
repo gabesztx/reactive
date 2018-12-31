@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StarterComponent } from './starter/starter.component';
+import { StarterComponent } from './starter.component';
+
 
 @NgModule({
   declarations: [

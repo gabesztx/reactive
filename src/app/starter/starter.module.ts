@@ -8,6 +8,9 @@ import { StarterComponent } from './starter/starter.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    StarterComponent
   ]
 })
 export class StarterModule {

@@ -8,7 +8,6 @@ import { CreationModule } from './creation/creation.module';
 import { ErrorHandlingModule } from './error-handling/error-handling.module';
 import { FilteringModule } from './filtering/filtering.module';
 import { TransformationModule } from './transformation/transformation.module';
-import { FilteringModule } from './filtering/filtering.module';
 import { UtilityModule } from './utility/utility.module';
 import { MulticastingModule } from './multicasting/multicasting.module';
 import { AppComponent } from './app.component';

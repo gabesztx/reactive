@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Observer, from, observable } from 'rxjs';
-import {} from 'rxjs/BehaviorSubject';
+import { Observable, Observer, from, observable, Subject, BehaviorSubject, Subscription } from 'rxjs';
+
+// import {} from 'rxjs/BehaviorSubject';
 
 @Component({
   selector: 'app-starter',
@@ -11,12 +12,10 @@ import {} from 'rxjs/BehaviorSubject';
 
 export class StarterComponent implements OnInit {
 
+  // subject:any;
+  // subscription: Subscription;
 
   constructor() {
-    /*
-    * From
-    **/
-
     /*
     const numbers = [1, 2, 3, 4, 5];
     const arraySource = from(numbers);
@@ -54,30 +53,31 @@ export class StarterComponent implements OnInit {
 
   ngOnInit() {
     // console.log('StarterComponent');
-    const numbers = [1, 2, 3, 4, 5, 7];
-    const source = Observable.create(obs => {
-      // let index = 0;
-      /*const timer = setInterval(() => {
-        obs.next(numbers[index]);
-        index++;
-        /!*if (numbers[index] === 2) {
-          obs.error('Something went wrong!');
-        }*!/
-        if (index === numbers.length) {
-          clearInterval(timer);
-          obs.complete();
-        }
-      }, 500);*/
+    /* const numbers = [1, 2, 3, 4, 5, 7];
+     const source = Observable.create(obs => {
+ 
+       let index = 0;
+       const timer = setInterval(() => {
+         obs.next(numbers[index]);
+         index++;
+         /!*if (numbers[index] === 2) {
+           obs.error('Something went wrong!');
+         }*!/
+         if (index === numbers.length) {
+           clearInterval(timer);
+           obs.complete();
+         }
+       }, 500);
+ 
+       // for (const n of numbers) {
+       //   obs.next(n);
+       // }
+ 
+       obs.complete();
+     });*/
 
-      for (const n of numbers) {
-        obs.next(n);
-      }
 
-      obs.complete();
-    });
-
-
-    const subscribe = source.subscribe(
+    /*const subscribe = source.subscribe(
       val => {
         console.log('Value: ', val);
       },
@@ -86,7 +86,7 @@ export class StarterComponent implements OnInit {
       },
       () => {
         console.log('Completed!');
-      });
+      });*/
   }
 
 }

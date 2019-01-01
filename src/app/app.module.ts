@@ -10,6 +10,7 @@ import { FilteringModule } from './filtering/filtering.module';
 import { TransformationModule } from './transformation/transformation.module';
 import { UtilityModule } from './utility/utility.module';
 import { MulticastingModule } from './multicasting/multicasting.module';
+import { SubjectModule } from './subject/subject.module';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -28,6 +29,7 @@ import { AppComponent } from './app.component';
     TransformationModule,
     UtilityModule,
     MulticastingModule,
+    SubjectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

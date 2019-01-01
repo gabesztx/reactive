@@ -17,7 +17,6 @@ export class MapToComponent implements OnInit {
     /*const source = from([1, 2, 3, 4, 5]);
     const example = source.pipe(mapTo('convert this value'));*/
 
-
     const source = fromEvent(document, 'click');
     const example = source.pipe(mapTo('GOODBYE WORLD!'));
 

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { range } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-range',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RangeComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
+    const source = range(0, 10);
+    const example = source.pipe(map(value => value + 5));
+    const subscribe = example.subscribe(
+      val => {
+        console.log('Value: ', val);
+      },
+      err => {
+        console.log('Error: ', err);
+      },
+      () => {
+        console.log('Completed!');
+      });
   }
 
 }

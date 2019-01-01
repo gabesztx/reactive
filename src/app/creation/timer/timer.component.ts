@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { timer } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-timer',
@@ -7,9 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TimerComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
+    // const source = timer(1000);
+    const source = timer(100, 100);
+    const example = source.pipe(map(value => value + 5));
+    const subscribe = example.subscribe(
+      val => {
+        if (val === 10) {
+          subscribe.unsubscribe();
+        }
+        console.log('Value: ', val);
+      },
+      err => {
+        console.log('Error: ', err);
+      },
+      () => {
+        console.log('Completed!');
+      });
   }
 
 }

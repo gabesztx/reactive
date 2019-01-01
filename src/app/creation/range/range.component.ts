@@ -13,7 +13,7 @@ export class RangeComponent implements OnInit {
   }
 
   ngOnInit() {
-    const source = range(0, 10);
+    const source = range(5, 5); // Emit numbers in provided range in sequence
     const example = source.pipe(map(value => value + 5));
     const subscribe = example.subscribe(
       val => {

@@ -6,10 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./transformation.component.scss']
 })
 export class TransformationComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  constructor() {}
+  ngOnInit() {}
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Observer, from, observable } from 'rxjs';
+import {} from 'rxjs/BehaviorSubject';
 
 @Component({
   selector: 'app-starter',
@@ -53,28 +54,26 @@ export class StarterComponent implements OnInit {
 
   ngOnInit() {
     // console.log('StarterComponent');
-    let index = 0;
     const numbers = [1, 2, 3, 4, 5, 7];
     const source = Observable.create(obs => {
       // let index = 0;
-      const timer = setInterval(() => {
+      /*const timer = setInterval(() => {
         obs.next(numbers[index]);
         index++;
-        /*if (numbers[index] === 2) {
+        /!*if (numbers[index] === 2) {
           obs.error('Something went wrong!');
-        }*/
+        }*!/
         if (index === numbers.length) {
           clearInterval(timer);
           obs.complete();
         }
-      }, 500);
+      }, 500);*/
 
-      /*
       for (const n of numbers) {
         obs.next(n);
       }
-      */
-      // obs.complete();
+
+      obs.complete();
     });
 
 

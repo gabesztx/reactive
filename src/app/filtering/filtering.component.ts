@@ -12,8 +12,6 @@ export class FilteringComponent implements OnInit {
   }
 
   ngOnInit() {
-
-
   }
 
 }

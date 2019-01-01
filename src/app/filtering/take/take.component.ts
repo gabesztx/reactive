@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { of, from, interval } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-take',
@@ -7,9 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TakeComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
+    // const source = from([1, 5, 10, 15, 20]);
+    // const source = of(1, 5, 10, 15, 20);
+    const interval$ = interval(500);
+    const example = interval$.pipe(take(3)); // interval output: 0,1,2 and done
+    const subscribe = example.subscribe(
+      val => {
+        /*if (val === 10) {
+          subscribe.unsubscribe();
+        }*/
+        console.log('Value: ', `${val}`);
+      },
+      err => {
+        console.log('Error: ', err);
+      },
+      () => {
+        console.log('Completed!');
+      });
   }
 
 }

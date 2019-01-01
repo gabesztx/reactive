@@ -9,8 +9,7 @@ import { map } from 'rxjs/operators';
 })
 export class RangeComponent implements OnInit {
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit() {
     const source = range(5, 5); // Emit numbers in provided range in sequence

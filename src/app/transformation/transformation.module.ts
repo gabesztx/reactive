@@ -4,6 +4,7 @@ import { TransformationComponent } from './transformation.component';
 import { MapComponent } from './map/map.component';
 import { MapToComponent } from './map-to/map-to.component';
 import { ScanComponent } from './scan/scan.component';
+import { SwitchmapComponent } from './switchmap/switchmap.component';
 
 @NgModule({
   declarations: [
@@ -11,11 +12,15 @@ import { ScanComponent } from './scan/scan.component';
     MapComponent,
     MapToComponent,
     ScanComponent,
+    SwitchmapComponent,
   ],
   imports: [
     CommonModule
   ],
-  exports: [TransformationComponent]
+  exports: [
+    TransformationComponent,
+    SwitchmapComponent
+  ]
 })
 export class TransformationModule {
 }

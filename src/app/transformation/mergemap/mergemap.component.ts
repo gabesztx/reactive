@@ -18,7 +18,7 @@ export class MergemapComponent implements OnInit {
     const source = fromEvent(document, 'click');
     const example = source.pipe(
       tap(event => console.log('Click value: ', event)),
-      mergeMap(val => interval(1000)) // when click NOT canceld fromEvent observable
+      mergeMap(val => interval(1000))
     );
     */
 
@@ -48,3 +48,7 @@ export class MergemapComponent implements OnInit {
   }
 
 }
+
+/*
+ - when click NOT canceld observable
+*/

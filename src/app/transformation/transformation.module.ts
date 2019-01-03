@@ -6,6 +6,7 @@ import { MapToComponent } from './map-to/map-to.component';
 import { ScanComponent } from './scan/scan.component';
 import { SwitchmapComponent } from './switchmap/switchmap.component';
 import { MergemapComponent } from './mergemap/mergemap.component';
+import { ConcatmapComponent } from './concatmap/concatmap.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { MergemapComponent } from './mergemap/mergemap.component';
     ScanComponent,
     SwitchmapComponent,
     MergemapComponent,
+    ConcatmapComponent,
   ],
   imports: [
     CommonModule

@@ -4,11 +4,13 @@ import { CombinationComponent } from './combination.component';
 import { CombineAllComponent } from './combine-all/combine-all.component';
 import { ConcactComponent } from './concact/concact.component';
 import { ConcactAllComponent } from './concact-all/concact-all.component';
+import { StartwithComponent } from './startwith/startwith.component';
 
 @NgModule({
   declarations: [
     CombinationComponent,
     CombineAllComponent,
+    StartwithComponent,
     // ConcactComponent,
     // ConcactAllComponent
   ],

@@ -13,12 +13,16 @@ export class SwitchmapComponent implements OnInit {
 
   ngOnInit() {
 
+    // const source = timer(0, 5000);
+    // const example = source.pipe(switchMap(() => interval(1000)));
+
     const source = fromEvent(document, 'click');
     const example = source.pipe(
-      tap(x => console.log('click value: ', x)),
-      switchMap(val => interval(1000))
+      // tap(x => console.log('click value: ', x)),
+      // switchMap(val => interval(1000))
+      switchMap(val => timer(0, 1000)),
+      // tap(x => console.log('click value: ', x))
     );
-
     /*
     const character$ = Observable.create(obs => {
       obs.next('A');

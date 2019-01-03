@@ -8,11 +8,17 @@ import { BehaviorSubject, Subscription, Subject } from 'rxjs';
 })
 export class SubjectComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
-    // const subject: Subject<any> = new Subject();
-    const subject: BehaviorSubject<any> = new BehaviorSubject('Val0');
+    const subject: Subject<any> = new Subject();
+    // const subject: BehaviorSubject<any> = new BehaviorSubject('first value');
+
+    // subject.subscribe((data) => {
+    //   console.log('Subscriber A:', data);
+    // });
+
     const subscription: Subscription = subject.subscribe(
       value => {
         console.log('Value: ', value);
@@ -22,11 +28,17 @@ export class SubjectComponent implements OnInit {
       },
       () => {
         console.log('Completed!');
-        subscription.unsubscribe();
+        console.log('VALUE', subject);
+        // subscription.unsubscribe();
       }
     );
 
+    subject.next(Math.random());
+    subject.next(Math.random());
+    subject.complete();
 
+
+    /*
     setTimeout(() => {
       subject.next('Val1');
     }, 1500);
@@ -36,6 +48,7 @@ export class SubjectComponent implements OnInit {
     setTimeout(() => {
       subject.complete();
     }, 3500);
+    */
   }
 
 }

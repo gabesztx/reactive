@@ -19,16 +19,17 @@ export class ConcatmapComponent implements OnInit {
 
     // Concact Map
     const example = source.pipe(
-      // map value from source into inner observable, when complete emit result and move to next
-      // sequence next
+     // sequence next
       concatMap(val => of(`Delayed by: ${val}ms`).pipe(delay(val)))
     );
 
     // Merge Map
-    /*const example = source.pipe(
+    /*
+    const example = source.pipe(
       // delay(5000),
       mergeMap(val => of(`Delayed by: ${val}ms`).pipe(delay(val)))
-    );*/
+    );
+    */
 
     const subscribe = example.subscribe(
       val => {

@@ -9,7 +9,8 @@ import { switchMap, take, tap, mapTo } from 'rxjs/operators';
 })
 export class SwitchmapComponent implements OnInit {
 
-  constructor() {}
+  constructor() {
+  }
 
   ngOnInit() {
     const source = timer(0, 5000);
@@ -17,21 +18,13 @@ export class SwitchmapComponent implements OnInit {
       switchMap(() => interval(500))
     );
 
-   /* const source = fromEvent(document, 'click');
-    const example = source.pipe(
-      switchMap(val => interval(1000).pipe(mapTo('Hello, I made it!')))
-    );*/
+    /*
+    const source = fromEvent(document, 'click');
+     const example = source.pipe(
+       switchMap(val => interval(1000).pipe(mapTo('Hello, I made it!')))
+     );
+     */
 
-    const subscribe = example.subscribe(
-      val => {
-        console.log('Emitted Valu: ', val);
-      },
-      err => {
-        console.log('Error: ', err);
-      },
-      () => {
-        console.log('Completed!');
-      });
     /*
     const character$ = Observable.create(obs => {
       obs.next('A');
@@ -54,7 +47,16 @@ export class SwitchmapComponent implements OnInit {
         console.log('Completed!');
       });
       */
-
+    const subscribe = example.subscribe(
+      val => {
+        console.log('Emitted Valu: ', val);
+      },
+      err => {
+        console.log('Error: ', err);
+      },
+      () => {
+        console.log('Completed!');
+      });
   }
 }
 

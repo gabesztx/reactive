@@ -28,7 +28,7 @@ export class SubjectComponent implements OnInit {
       },
       () => {
         console.log('Completed!');
-        console.log('VALUE', subject);
+        // console.log('VALUE', subject);
         // subscription.unsubscribe();
       }
     );

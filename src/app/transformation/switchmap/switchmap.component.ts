@@ -9,21 +9,21 @@ import { switchMap, take, tap, mapTo } from 'rxjs/operators';
 })
 export class SwitchmapComponent implements OnInit {
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit() {
+    /*
     const source = timer(0, 5000);
     const example = source.pipe(
       switchMap(() => interval(500))
     );
+    */
 
-    /*
     const source = fromEvent(document, 'click');
-     const example = source.pipe(
-       switchMap(val => interval(1000).pipe(mapTo('Hello, I made it!')))
-     );
-     */
+    const example = source.pipe(
+      tap(x => console.log('click value: ', x)),
+      switchMap(val => interval(1000)) // when click canceld (old) fromEvent observable
+    );
 
     /*
     const character$ = Observable.create(obs => {
@@ -47,6 +47,7 @@ export class SwitchmapComponent implements OnInit {
         console.log('Completed!');
       });
       */
+
     const subscribe = example.subscribe(
       val => {
         console.log('Emitted Valu: ', val);
@@ -61,6 +62,7 @@ export class SwitchmapComponent implements OnInit {
 }
 
 /*
+ - If only one "inner subscription" should be active at a time, try
  - short-lived streams like for example HTTP Requests, that only emit one value
  - long-lived streams such as for example the ones returned by AngularFire, which is an Angular library that provides some services for interacting with the Firebase real-time database and authentication
  - If you would like more than one inner subscription to be maintained, try mergeMap!

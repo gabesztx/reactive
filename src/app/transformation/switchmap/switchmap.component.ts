@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, interval, timer, fromEvent } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { Observable, interval, from, timer, of, fromEvent } from 'rxjs';
+import { map, switchMap, tap, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-switchmap',
@@ -9,20 +9,29 @@ import { switchMap, tap } from 'rxjs/operators';
 })
 export class SwitchmapComponent implements OnInit {
 
-  constructor() {}
+  constructor() {
+  }
 
   ngOnInit() {
+    /*const source = of([0, 1, 2, 3, 4]).pipe(
+      tap(x => console.log('of value: ', x)),
+      switchMap(val => {
+        // console.log(val);
+        return from(val).pipe(take(2));
+      }),
+      tap(x => console.log('from value: ', x)),
+    );*/
 
-    // const source = timer(0, 5000);
-    // const example = source.pipe(switchMap(() => interval(1000)));
+    const source = timer(0, 5000);
+    const example = source.pipe(switchMap(() => interval(1000)));
 
-    const source = fromEvent(document, 'click');
+    /*const source = fromEvent(document, 'click');
     const example = source.pipe(
       // tap(x => console.log('click value: ', x)),
       // switchMap(val => interval(1000))
       switchMap(val => timer(0, 1000)),
       // tap(x => console.log('click value: ', x))
-    );
+    );*/
     /*
     const character$ = Observable.create(obs => {
       obs.next('A');
@@ -46,9 +55,10 @@ export class SwitchmapComponent implements OnInit {
       });
       */
 
-    const subscribe = example.subscribe(
+    const subscribe = source.subscribe(
+      // const subscribe = example.subscribe(
       val => {
-        console.log('Emitted Valu: ', val);
+        // console.log('Emitted Valu: ', val);
       },
       err => {
         console.log('Error: ', err);

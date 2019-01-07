@@ -51,4 +51,7 @@ export class MergemapComponent implements OnInit {
 
 /*
  - when click NOT canceld observable
+  - párhuzamosan asyncronba futtatja le a - subscribe / requstet
+  - used: amikor nem fontos a visszatérési sorrend ill több kérés esetén nem szaktíja meg a jelenlelegi
+  futását
 */

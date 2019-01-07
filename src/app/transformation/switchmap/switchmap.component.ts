@@ -71,14 +71,13 @@ export class SwitchmapComponent implements OnInit {
 
 /*
  - When click canceld (old) fromEvent observable
- - Only one "inner subscription" should be active at a time
  Tip:
  - short-lived streams like for example HTTP Requests, that only emit one value
  - long-lived streams such as for example the ones returned by AngularFire, which is an Angular library that provides some services for interacting with the Firebase real-time database and authentication
  - If you would like more than one inner subscription to be maintained, try mergeMap!
  - This operator is generally considered a safer default to mergeMap!
  - This operator can cancel in-flight network requests!
-
+   - used:
 */
 
 

@@ -48,5 +48,7 @@ export class ConcatmapComponent implements OnInit {
 /*
  - The order of emission and subscription of inner observables is important
  - Map value from source into inner observable, when complete emit result and move to next
+ - Sorrendben futtatje le - subscribe / requstet
+ - used: ha fontos a lefutási - visszatérési sorrend
 */
 

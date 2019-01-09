@@ -22,8 +22,10 @@ export class SwitchmapComponent implements OnInit {
       tap(x => console.log('from value: ', x)),
     );*/
 
-    const source = timer(0, 5000);
-    const example = source.pipe(switchMap(() => interval(1000)));
+    const source = timer(0, 3000);
+    const example = source.pipe(
+      switchMap(() => interval(1000))
+    );
 
     /*const source = fromEvent(document, 'click');
     const example = source.pipe(
@@ -58,7 +60,7 @@ export class SwitchmapComponent implements OnInit {
     const subscribe = source.subscribe(
       // const subscribe = example.subscribe(
       val => {
-        // console.log('Emitted Valu: ', val);
+        console.log('Emitted: ', val);
       },
       err => {
         console.log('Error: ', err);

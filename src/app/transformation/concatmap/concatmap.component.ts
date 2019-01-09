@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { interval, of } from 'rxjs';
-import { switchMap, take, tap, concatMap, delay, mergeMap } from 'rxjs/operators';
+import { switchMap, take, tap, concatMap, delay, mergeMap, merge } from 'rxjs/operators';
 
 @Component({
   selector: 'app-concatmap',
@@ -15,12 +15,12 @@ export class ConcatmapComponent implements OnInit {
 
   ngOnInit() {
 
-    const source = of(3000, 1500);
+    const source = of(2000, 1000, 3000, 1000);
 
     // Concact Map
     const example = source.pipe(
-     // sequence next
-      concatMap(val => of(`Delayed by: ${val}ms`).pipe(delay(val)))
+     //  concatMap(val => of(`Delayed by: ${val}ms`).pipe(delay(val)))
+      // mergeMap(val => of(`Delayed by: ${val}ms`).pipe(delay(val)))
     );
 
     // Merge Map

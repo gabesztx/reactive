@@ -14,7 +14,7 @@ export class TimerComponent implements OnInit {
 
   ngOnInit() {
     // const source = timer(1000);
-    const source = timer(100, 100); // first argument delay, second: looptimer
+    const source = timer(0, 100); // first argument delay, second: looptimer
     const example = source.pipe(map(value => value + 5));
     const subscribe = example.subscribe(
       val => {

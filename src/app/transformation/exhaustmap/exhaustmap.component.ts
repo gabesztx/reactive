@@ -16,7 +16,7 @@ export class ExhaustmapComponent implements OnInit {
 
   ngOnInit() {
 
-    this.clicks = timer(1000);
+   /* this.clicks = timer(1000);
     this.result = this.clicks.pipe(
       exhaustMap((ev) => {
         console.log('first', ev);
@@ -29,24 +29,35 @@ export class ExhaustmapComponent implements OnInit {
       // console.log('---- timer ----');
       this.triggerMap();
     }, 2000);
-    this.triggerMap();
+
+    // this.triggerMap();*/
+
 
     /*const firstInterval = interval(1000).pipe(take(6));
-    const secondInterval = interval(1000).pipe(take(2));
-    // const firstInterval = timer(4000);
-    // const secondInterval = timer(10);
+    const secondInterval = interval(500).pipe(take(2));
     const exhaustSub = firstInterval.pipe(
       exhaustMap(value => {
         console.log(`Emission Corrected of first interval: ${value}`);
         return secondInterval;
       })
-    )*/
+    )
+
+    const subscribe = exhaustSub.subscribe(
+      val => {
+        console.log('Emitted Valu: ', val);
+      },
+      err => {
+        console.log('Error: ', err);
+      },
+      () => {
+        console.log('Completed!');
+      });*/
+
 
 
   }
 
   triggerMap() {
-    // console.log('triggerMap');
     const subscribe = this.result.subscribe(
       val => {
         console.log('Emitted Valu: ', val);

@@ -12,12 +12,10 @@ import { UtilityModule } from './utility/utility.module';
 import { MulticastingModule } from './multicasting/multicasting.module';
 import { SubjectModule } from './subject/subject.module';
 import { AppComponent } from './app.component';
-import { TakeUntilComponent } from './fitering/take-until/take-until.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    TakeUntilComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +32,6 @@ import { TakeUntilComponent } from './fitering/take-until/take-until.component';
     SubjectModule,
   ],
   providers: [],
-  bootstrap: [AppComponent],
-  exports: [TakeUntilComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

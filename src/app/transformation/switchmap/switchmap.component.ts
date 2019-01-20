@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, interval, from, timer, of, fromEvent } from 'rxjs';
-import { map, switchMap, tap, take } from 'rxjs/operators';
+import { map, switchMap, tap, take, delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-switchmap',
@@ -22,18 +22,21 @@ export class SwitchmapComponent implements OnInit {
       tap(x => console.log('from value: ', x)),
     );*/
 
-    const source = timer(0, 3000);
-    const example = source.pipe(
-      switchMap(() => interval(1000))
-    );
+    /* const source = timer(0, 3000);
+     const example = source.pipe(
+       switchMap(() => interval(1000))
+     );*/
 
-    /*const source = fromEvent(document, 'click');
+    const source = fromEvent(document, 'click');
     const example = source.pipe(
       // tap(x => console.log('click value: ', x)),
       // switchMap(val => interval(1000))
-      switchMap(val => timer(0, 1000)),
+      switchMap(val => {
+        // console.log('SWIIITCH', val);
+        return timer(0, 1000);
+      }),
       // tap(x => console.log('click value: ', x))
-    );*/
+    );
     /*
     const character$ = Observable.create(obs => {
       obs.next('A');
@@ -57,7 +60,7 @@ export class SwitchmapComponent implements OnInit {
       });
       */
 
-    const subscribe = source.subscribe(
+    const subscribe = example.subscribe(
       // const subscribe = example.subscribe(
       val => {
         console.log('Emitted: ', val);

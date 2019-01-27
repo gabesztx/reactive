@@ -9,8 +9,7 @@ import { take, startWith } from 'rxjs/operators';
 })
 export class TakeComponent implements OnInit {
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit() {
     // const source = from([1, 5, 10, 15, 20]);

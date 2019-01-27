@@ -17,7 +17,14 @@ export class CreateComponent implements OnInit {
       for (const n of numbers) {
         obs.next(n);
       }
-      obs.complete();
+
+      setTimeout(() => {
+        // console.log('unsubscribe');
+        obs.complete();
+        // subscribe.unsubscribe();
+      }, 2000);
+
+      // obs.complete();
 
       // interval
       /*
@@ -64,6 +71,8 @@ export class CreateComponent implements OnInit {
       () => {
         console.log('Completed!');
       });
+
+
 
     /*setTimeout(() => {
       subscribe.unsubscribe();

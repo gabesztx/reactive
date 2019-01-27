@@ -15,21 +15,15 @@ export class ConcatmapComponent implements OnInit {
 
   ngOnInit() {
 
-    const source = of(2000, 1000, 3000, 1000);
-
-    // Concact Map
+    const source = of(2000, 4000, 1000, 3000);
+    // Concact, Merge, Swith Map
     const example = source.pipe(
-     //  concatMap(val => of(`Delayed by: ${val}ms`).pipe(delay(val)))
-      // mergeMap(val => of(`Delayed by: ${val}ms`).pipe(delay(val)))
-    );
 
-    // Merge Map
-    /*
-    const example = source.pipe(
-      // delay(5000),
+      tap(x => console.log('Log value: ', x)),
+      // switchMap(val => of(`Delayed by: ${val}ms`).pipe(delay(val)))
+      // concatMap(val => of(`Delayed by: ${val}ms`).pipe(delay(val)))
       mergeMap(val => of(`Delayed by: ${val}ms`).pipe(delay(val)))
     );
-    */
 
     const subscribe = example.subscribe(
       val => {

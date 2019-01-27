@@ -43,7 +43,7 @@ export class MergemapComponent implements OnInit {
         return myPromise(val);
       })
     );*/
-    
+
     /* mergeMap with resultSelector */
     const source = of('Hello');
     const myPromise = (val) => {

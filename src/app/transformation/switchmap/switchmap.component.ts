@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, interval, from, timer, of, fromEvent } from 'rxjs';
-import { map, switchMap, tap, take, delay } from 'rxjs/operators';
+import { map, switchMap, tap, take, delay, mapTo, mergeMap, concatMap } from 'rxjs/operators';
+
+// import { mapTo } from 'rxjs-compat/operator/mapTo';
 
 @Component({
   selector: 'app-switchmap',
@@ -27,16 +29,36 @@ export class SwitchmapComponent implements OnInit {
        switchMap(() => interval(1000))
      );*/
 
-    const source = fromEvent(document, 'click');
-    const example = source.pipe(
-      // tap(x => console.log('click value: ', x)),
-      // switchMap(val => interval(1000))
-      switchMap(val => {
-        // console.log('SWIIITCH', val);
-        return timer(0, 1000);
-      }),
-      // tap(x => console.log('click value: ', x))
+    const source = fromEvent(document, 'click').pipe(
+      switchMap(() => of(3000, 1000, 4000))
     );
+    const example = source.pipe(
+      tap(x => console.log('click', x)),
+      concatMap(val => {
+      // switchMap(val => {
+      // mergeMap(val => {
+        return timer(0, 1000).pipe(
+          delay(val),
+          map(value => {
+            console.log('Value', val);
+            return value
+          }),
+          take(3)
+        );
+      })
+    );
+
+    const subscribe = example.subscribe(
+      val => {
+        console.log('Emitted Valu: ', val);
+      },
+      err => {
+        console.log('Error: ', err);
+      },
+      () => {
+        console.log('Completed!');
+      });
+
     /*
     const character$ = Observable.create(obs => {
       obs.next('A');
@@ -59,18 +81,6 @@ export class SwitchmapComponent implements OnInit {
         console.log('Completed!');
       });
       */
-
-    const subscribe = example.subscribe(
-      // const subscribe = example.subscribe(
-      val => {
-        console.log('Emitted: ', val);
-      },
-      err => {
-        console.log('Error: ', err);
-      },
-      () => {
-        console.log('Completed!');
-      });
   }
 }
 

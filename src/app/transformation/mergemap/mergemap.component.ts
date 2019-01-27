@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { fromEvent, interval, of } from 'rxjs';
-import { switchMap, mergeMap, tap, mapTo } from 'rxjs/operators';
+import { fromEvent, interval, of, timer } from 'rxjs';
+import { switchMap, mergeMap, tap, mapTo, take, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-mergemap',
@@ -14,13 +14,6 @@ export class MergemapComponent implements OnInit {
 
   ngOnInit() {
 
-    /*
-    const source = fromEvent(document, 'click');
-    const example = source.pipe(
-      tap(event => console.log('Click value: ', event)),
-      mergeMap(val => interval(1000))
-    );
-    */
 
     /*
     const obs1 = fromEvent(document, 'click');
@@ -30,9 +23,42 @@ export class MergemapComponent implements OnInit {
     );
     */
 
-    const obs1 = of('Hello');
+    /*const obs1 = of('Hello');
     const example = obs1.pipe(
       mergeMap(val => of(`${val} World`))
+    );*/
+
+    /* mergeMap with promise */
+
+    /*const source = of('Source value - ');
+    const myPromise = (val) => {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          resolve(`${val} Promise value`);
+        }, 3000);
+      });
+    };
+    const example = source.pipe(
+      mergeMap(val => {
+        return myPromise(val);
+      })
+    );*/
+    
+    /* mergeMap with resultSelector */
+    const source = of('Hello');
+    const myPromise = (val) => {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          resolve(`${val} Promise`);
+        });
+      });
+    };
+    const example = source.pipe(
+      mergeMap(val => {
+        return myPromise(val);
+      }, (valueFromSource, valueFromPromise) => {
+        return `Source: ${valueFromSource}, Promise: ${valueFromPromise}`;
+      })
     );
 
     const subscribe = example.subscribe(
@@ -46,8 +72,8 @@ export class MergemapComponent implements OnInit {
         console.log('Completed!');
       });
   }
-
 }
+
 
 /*
  - when click NOT canceld observable

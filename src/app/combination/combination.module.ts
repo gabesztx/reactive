@@ -13,8 +13,8 @@ import { WithlatestfromComponent } from './withlatestfrom/withlatestfrom.compone
     CombineAllComponent,
     StartwithComponent,
     WithlatestfromComponent,
-    // ConcactComponent,
-    // ConcactAllComponent
+    ConcactComponent,
+    ConcactAllComponent
   ],
   imports: [
     CommonModule

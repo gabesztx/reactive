@@ -20,6 +20,7 @@ export class ConcactComponent implements OnInit {
     const source4$ = of(10, 11, 12);
 
     const example$ = concatObs(source1$, source2$, source3$, source4$);
+
     const subscribe = example$.subscribe(
       val => {
         console.log('Emit value: ', val);

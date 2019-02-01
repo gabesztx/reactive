@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { fromEvent, interval, of } from 'rxjs';
+import { concat as concatObs, fromEvent, interval, of, timer } from 'rxjs';
 import { concat, concatAll, delay, map, take } from 'rxjs/operators';
 
 @Component({
@@ -13,23 +13,24 @@ export class ConcactAllComponent implements OnInit {
   }
 
   ngOnInit() {
-    /*const clicks = fromEvent(document, 'click');
+    /*
+    const clicks = fromEvent(document, 'click');
     const higherOrder$ = clicks.pipe(
       map(ev => {
         console.log('CLICK', ev);
         return interval(1000).pipe(take(4));
       })
     );
-    const firstOrder = higherOrder$.pipe(concatAll());*/
+    const firstOrder = higherOrder$.pipe(concatAll())
+    ;*/
 
-    const source = interval(2000);
-    const example = source.pipe(
-      //  for demonstration, add 10 to and return as observable
+    const source = timer(0, 1000);
+    const example$ = source.pipe(
       map(val => of(val + 10)), // return observable and subscribe
       concatAll()
     );
 
-    const subscribe = example.subscribe(
+    const subscribe = example$.subscribe(
       val => {
         console.log('Emit value: ', val);
       },

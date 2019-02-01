@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { concat as concatObs, fromEvent, interval, of, timer } from 'rxjs';
-import { concat, concatAll, delay, map, take } from 'rxjs/operators';
+import { concat, concatAll, delay, map, take, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-concact-all',
@@ -15,20 +15,28 @@ export class ConcactAllComponent implements OnInit {
   ngOnInit() {
     /*
     const clicks = fromEvent(document, 'click');
-    const higherOrder$ = clicks.pipe(
+    const source$ = clicks.pipe(
+      tap(x => console.log('Click')),
       map(ev => {
-        console.log('CLICK', ev);
-        return interval(1000).pipe(take(4));
+        return interval(500).pipe(take(3));
       })
     );
-    const firstOrder = higherOrder$.pipe(concatAll())
-    ;*/
+    const example$ = source$.pipe(concatAll());
+    */
 
+
+    /*
     const source = timer(0, 1000);
     const example$ = source.pipe(
-      map(val => of(val + 10)), // return observable and subscribe
+      map(val => of(val + 10)),
       concatAll()
     );
+    */
+    const example$ = of(
+      timer(1000),
+      timer(2000),
+      timer(3000),
+    ).pipe(concatAll()); // observable subscribe and next..., observable subscribe and next...
 
     const subscribe = example$.subscribe(
       val => {

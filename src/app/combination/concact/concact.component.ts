@@ -10,8 +10,7 @@ import { combineAll, concatAll, delay } from 'rxjs/operators';
 })
 export class ConcactComponent implements OnInit {
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit() {
     const source1$ = of(1, 2, 3);

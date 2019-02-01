@@ -24,10 +24,11 @@ export class CombineAllComponent implements OnInit {
       )
     );*/
 
-    const source1 = of(1, 2, 3);
+    const source1 = of(1, 2, 3, 4, 5);
     const source2 = interval(1000).pipe(take(3), map(value => value + 1));
     const source3 = of(1, 2, 3).pipe(delay(1000));
     const combined = of(source1, source2, source3).pipe(combineAll());
+    // const combined = of(source1, source2, source3).pipe(combineAll());
 
     const subscribe = combined.subscribe(
       val => {

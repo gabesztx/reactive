@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { of } from 'rxjs';
-import { concat } from 'rxjs/operators';
+import { concat, concatAll, delay } from 'rxjs/operators';
 
 
 @Component({
@@ -10,11 +10,12 @@ import { concat } from 'rxjs/operators';
 })
 export class ConcactComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
     const source1$ = of(1, 2, 3);
-    const source2$ = of(4, 5, 6);
+    const source2$ = of(4, 5, 6).pipe(delay(2000));
     const example$ = source1$.pipe(concat(source2$));
 
     const subscribe = example$.subscribe(

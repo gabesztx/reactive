@@ -21,14 +21,22 @@ export class CombineAllComponent implements OnInit {
     */
 
     const source1$ = of(1, 2, 3).pipe(
-      tap(x => console.log('obs1')),
-      delay(1000));
+      tap(x => console.log('obs1 start')),
+      delay(2000),
+      tap(x => console.log('obs1 done')),
+    );
     const source2$ = of(10, 20, 30).pipe(
-      tap(x => console.log('obs2')),
-      delay(1000));
+      tap(x => console.log('obs2 start')),
+      delay(3000),
+      tap(x => console.log('obs2 done')),
+      // take(1),
+    );
     const source3$ = of(100, 200, 300, 400).pipe(
-      tap(x => console.log('obs3')),
-      delay(1000));
+      tap(x => console.log('obs3 start')),
+      delay(5000),
+      tap(x => console.log('obs3 done')),
+      // take(1),
+    );
 
     // asynchron method
     const example$ = of(
@@ -41,6 +49,7 @@ export class CombineAllComponent implements OnInit {
     ).pipe(combineAll());
     // when source1$, source2$, source3$ loaded then subscribe
     // compelted()
+
     const subscribe = example$.subscribe(
       val => {
         console.log('Emit value: ', val);

@@ -36,13 +36,13 @@ export class ConcactAllComponent implements OnInit {
 
     const source1$ = of(1, 2, 3).pipe(
       tap(x => console.log('obs1')),
-      delay(1000));
+      delay(2000));
     const source2$ = of(10, 20, 30).pipe(
       tap(x => console.log('obs2')),
-      delay(1000));
+      delay(3000));
     const source3$ = of(100, 200, 300).pipe(
       tap(x => console.log('obs3')),
-      delay(1000));
+      delay(5000));
 
     // synchron method
     const example$ = of(

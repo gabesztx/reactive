@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { interval, timer, fromEvent, Observable } from 'rxjs';
-import { exhaustMap, tap, take, delay } from 'rxjs/operators';
+import { exhaustMap, tap, take, delay, map, exhaust } from 'rxjs/operators';
 
 @Component({
   selector: 'app-exhaustmap',
@@ -16,21 +16,17 @@ export class ExhaustmapComponent implements OnInit {
 
   ngOnInit() {
 
-   /* this.clicks = timer(1000);
-    this.result = this.clicks.pipe(
-      exhaustMap((ev) => {
-        console.log('first', ev);
-        return interval(100).pipe(take(10));
-        // return timer(3000);
-      })
-    );
+    /*  const firstInterval = timer(1000);
+      const example$ = firstInterval.pipe(
+        exhaustMap((ev) => {
+          console.log('first', ev);
+          return interval(100).pipe(take(5));
+          // return timer(3000);
+        })
+      );*/
 
-    setInterval(() => {
-      // console.log('---- timer ----');
-      this.triggerMap();
-    }, 2000);
 
-    // this.triggerMap();*/
+    // this.triggerMap();
 
 
     /*const firstInterval = interval(1000).pipe(take(6));
@@ -40,9 +36,18 @@ export class ExhaustmapComponent implements OnInit {
         console.log(`Emission Corrected of first interval: ${value}`);
         return secondInterval;
       })
-    )
+    )*/
 
-    const subscribe = exhaustSub.subscribe(
+    const clickEvent$ = fromEvent(document, 'click');
+    const source$ = clickEvent$.pipe(
+      tap(x => console.log('click')),
+      map(ev => {
+        return interval(500).pipe(take(5));
+      })
+    );
+    const example$ = source$.pipe(exhaust());
+
+    const subscribe = example$.subscribe(
       val => {
         console.log('Emitted Valu: ', val);
       },
@@ -51,13 +56,12 @@ export class ExhaustmapComponent implements OnInit {
       },
       () => {
         console.log('Completed!');
-      });*/
-
+      });
 
 
   }
 
-  triggerMap() {
+  /*triggerMap() {
     const subscribe = this.result.subscribe(
       val => {
         console.log('Emitted Valu: ', val);
@@ -68,7 +72,7 @@ export class ExhaustmapComponent implements OnInit {
       () => {
         console.log('Completed!');
       });
-  }
+  }*/
 
 }
 

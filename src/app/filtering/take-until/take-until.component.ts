@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { interval, fromEvent, timer } from 'rxjs';
-import { takeUntil, filter, scan, map, withLatestFrom } from 'rxjs/operators';
+import { interval, fromEvent, timer, of } from 'rxjs';
+import { takeUntil, filter, scan, map, withLatestFrom, tap, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-take-until',
@@ -13,27 +13,26 @@ export class TakeUntilComponent implements OnInit {
   }
 
   ngOnInit() {
+    /*
+    const source$ = interval(1000);
+    const clicks$ = fromEvent(document, 'click');
+    const example$ = source$.pipe(
+      takeUntil(clicks$),
+    );
+    */
 
-    const interval$ = interval(50);
-    const clicks = fromEvent(document, 'click');
-    const example = interval$.pipe(takeUntil(clicks));
+     const source$ = timer(0, 1000);
+     const sourceUntil$ = timer(5000);
+     const example$ = source$.pipe(
+       // tap(x => console.log('before val: ', x)),
+       takeUntil(sourceUntil$),
+       // tap(x => console.log('after val: ', x)),
+     );
+     // source source$ interval loop, then sourceUntil$ will completed
 
-
-    // const source = interval(1000); // emit value every 1s
-    // const source = timer(0, 1000); // emit value every 1s
-    // const timer$ = timer(5000); // after 5 seconds, emit value
-    // const example = source.pipe(takeUntil(timer$)); // when timer emits after 5s, complete source
-
-    // const source = interval(1000); // emit value every 1s
-    // const isEven = val => val % 2 === 0; // is number even?
-    // const example = source.pipe(filter(isEven)); // only allow values that are even
-
-    const subscribe = example.subscribe(
+    const subscribe = example$.subscribe(
       val => {
-        /*if (val === 10) {
-          subscribe.unsubscribe();
-        }*/
-        console.log('Value: ', `${val}`);
+        console.log('Emit value: ', `${val}`);
       },
       err => {
         console.log('Error: ', err);

@@ -6,6 +6,7 @@ import { ConcactComponent } from './concact/concact.component';
 import { ConcactAllComponent } from './concact-all/concact-all.component';
 import { StartwithComponent } from './startwith/startwith.component';
 import { WithlatestfromComponent } from './withlatestfrom/withlatestfrom.component';
+import { CombineLatestComponent } from './combine-latest/combine-latest.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { WithlatestfromComponent } from './withlatestfrom/withlatestfrom.compone
     StartwithComponent,
     WithlatestfromComponent,
     ConcactComponent,
-    ConcactAllComponent
+    ConcactAllComponent,
+    CombineLatestComponent
   ],
   imports: [
     CommonModule

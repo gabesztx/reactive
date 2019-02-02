@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { fromEvent, interval, of, timer } from 'rxjs';
-import { switchMap, mergeMap, tap, mapTo, take, map } from 'rxjs/operators';
+import { switchMap, mergeMap, tap, mapTo, take, map, concatMap, delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-mergemap',
@@ -14,19 +14,50 @@ export class MergemapComponent implements OnInit {
 
   ngOnInit() {
 
-
     /*
-    const obs1 = fromEvent(document, 'click');
-    const obs2 = interval(1000);
-    const example = obs1.pipe(
-      mergeMap(val => obs2)
+    const source$ = of(2000, 4000, 1000, 3000);
+    const example$ = source$.pipe(
+      tap(x => console.log('source values: ', x)),
+      mergeMap(val => of(val).pipe(delay(val)))
     );
+    // output: 1000 next() 2000 next() 3000 next() 4000 completed()
     */
 
-    /*const obs1 = of('Hello');
-    const example = obs1.pipe(
-      mergeMap(val => of(`${val} World`))
-    );*/
+
+    const clickEvent$ = fromEvent(document, 'click');
+    const source2$ = interval(1000);
+    const example$ = clickEvent$.pipe(
+      // take(1),
+      tap(x => console.log('click')),
+      mergeMap(val => source2$.pipe(take(5)))
+    );
+
+    const subscribe = example$.subscribe(
+      val => {
+        console.log('Emitted valu: ', val);
+      },
+      err => {
+        console.log('Error: ', err);
+      },
+      () => {
+        console.log('Completed!');
+      });
+
+
+    /*
+    const clickEvent$ = fromEvent(document, 'click');
+    const source$ = of(2000, 4000, 1000, 3000);
+    const example$ = clickEvent$.pipe(
+      tap(x => console.log('click')),
+      mergeMap(ev => {
+        return source$.pipe(
+          mergeMap(value => {
+            return of(value).pipe(delay(value));
+          })
+        );
+      }),
+    );
+    */
 
     /* mergeMap with promise */
 
@@ -45,7 +76,7 @@ export class MergemapComponent implements OnInit {
     );*/
 
     /* mergeMap with resultSelector */
-    const source = of('Hello');
+    /*const source = of('Hello');
     const myPromise = (val) => {
       return new Promise(resolve => {
         setTimeout(() => {
@@ -59,18 +90,8 @@ export class MergemapComponent implements OnInit {
       }, (valueFromSource, valueFromPromise) => {
         return `Source: ${valueFromSource}, Promise: ${valueFromPromise}`;
       })
-    );
+    );*/
 
-    const subscribe = example.subscribe(
-      val => {
-        console.log('Emitted Valu: ', val);
-      },
-      err => {
-        console.log('Error: ', err);
-      },
-      () => {
-        console.log('Completed!');
-      });
   }
 }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { interval, of } from 'rxjs';
+import { fromEvent, interval, of } from 'rxjs';
 import { switchMap, take, tap, concatMap, delay, mergeMap, merge } from 'rxjs/operators';
 
 @Component({
@@ -15,19 +15,25 @@ export class ConcatmapComponent implements OnInit {
 
   ngOnInit() {
 
-    const source = of(2000, 4000, 1000, 3000);
-    // Concact, Merge, Swith Map
-    const example = source.pipe(
-
-      tap(x => console.log('Log value: ', x)),
-      // switchMap(val => of(`Delayed by: ${val}ms`).pipe(delay(val)))
-      // concatMap(val => of(`Delayed by: ${val}ms`).pipe(delay(val)))
-      mergeMap(val => of(`Delayed by: ${val}ms`).pipe(delay(val)))
+    const source$ = of(2000, 4000, 1000, 3000);
+    const example$ = source$.pipe(
+      tap(x => console.log('source values: ', x)),
+      concatMap(val => of(val).pipe(delay(val)))
     );
+    // output: 2000 next() 4000 next() 1000 next() 3000 completed()
 
-    const subscribe = example.subscribe(
+
+    /*const clickEvent$ = fromEvent(document, 'click');
+    const source2$ = interval(1000);
+    const example$ = clickEvent$.pipe(
+      // take(1),
+      tap(x => console.log('click')),
+      concatMap(val => source2$.pipe(take(5)))
+    );*/
+
+    const subscribe = example$.subscribe(
       val => {
-        console.log('Emitted Valu: ', val);
+        console.log('Emitted valu: ', val);
       },
       err => {
         console.log('Error: ', err);

@@ -26,16 +26,21 @@ export class CombineAllComponent implements OnInit {
     const source2$ = of(10, 20, 30).pipe(
       tap(x => console.log('obs2')),
       delay(1000));
-    const source3$ = of(100, 200, 300).pipe(
+    const source3$ = of(100, 200, 300, 400).pipe(
       tap(x => console.log('obs3')),
       delay(1000));
 
+    // asynchron method
     const example$ = of(
       source1$,
+      // output: Array[3, 30, 100]
       source2$,
+      // output: Array[3, 30, 200]
       source3$
+      // output: Array[3, 30, 300]
     ).pipe(combineAll());
-
+    // when source1$, source2$, source3$ loaded then subscribe
+    // compelted()
     const subscribe = example$.subscribe(
       val => {
         console.log('Emit value: ', val);

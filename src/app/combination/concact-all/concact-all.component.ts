@@ -44,17 +44,20 @@ export class ConcactAllComponent implements OnInit {
       tap(x => console.log('obs3')),
       delay(1000));
 
-
+    // synchron method
     const example$ = of(
-      source1$, // when 1,2,3 completed then subscribe next()
-      // output: 1,2,3
-      source2$, // when 10,20,30 completed then subscribe and next()
-      // output: 10,20,30
-      source3$, // when 100,200,300 completed then subscribe and next() and finished
-      // output: 100,200,300
+      source1$,
+      // when 1,2,3 completed then subscribe next()
+      // output: 1, 2, 3
+      source2$,
+      // when 10,20,30 completed then subscribe and next()
+      // output: 10, 20, 30
+      source3$,
+      // when 100,200,300 completed then subscribe and next() and finished
+      // output: 100, 200, 300
       // complete()
     ).pipe(concatAll());
-    
+
     const subscribe = example$.subscribe(
       val => {
         console.log('Emit value: ', val);

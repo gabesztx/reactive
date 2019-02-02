@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { timer, combineLatest, of } from 'rxjs';
-import { combineAll, delay, map, tap, take } from 'rxjs/operators';
+import { timer, combineLatest, of, fromEvent } from 'rxjs';
+import { combineAll, delay, map, tap, take, startWith, mapTo, scan } from 'rxjs/operators';
 
 @Component({
   selector: 'app-combine-latest',
@@ -39,9 +39,7 @@ export class CombineLatestComponent implements OnInit {
       tap(x => console.log('obs3 done')),
       // take(1),
     );
-
     const example$ = combineLatest(source1$, source2$, source3$);
-
     const subscribe = example$.subscribe(
       val => {
         console.log('Emit value: ', val);
@@ -52,6 +50,38 @@ export class CombineLatestComponent implements OnInit {
       () => {
         console.log('Completed!');
       });
-  }
 
+
+    /*
+    const setHtml = (id) => {
+      return (val) => {
+        return (document.getElementById(id).innerHTML = val);
+      };
+    };
+    const addOneClick$ = (id) => {
+      return fromEvent(document.getElementById(id), 'click').pipe(
+        // map every click to 1
+        tap(x => console.log(`LOG: Click ${id} button`)),
+        mapTo(2),
+        startWith(0),
+        // keep a running total
+        scan((acc, curr) => {
+          // console.log('acc: ', acc, ' - ', 'acc: ', curr);
+          return acc + curr;
+        }),
+        // tap(x => console.log(`LOG: value: ${x}`)),
+        // set HTML for appropriate element
+        tap(setHtml(`${id}Total`))
+      );
+    };
+    const combineTotal$ = combineLatest(
+      addOneClick$('red'),
+      addOneClick$('black'))
+      .pipe(map(([val1, val2]) => {
+        console.log('RETURN', val1, val2);
+        return val1 + val2;
+      }))
+      .subscribe(setHtml('total'));
+      */
+  }
 }

@@ -32,10 +32,20 @@ export class ConcactAllComponent implements OnInit {
       concatAll()
     );
     */
+
+    const source1 = of(1).pipe(
+      tap(x => console.log('obs1')),
+      delay(1000));
+    const source2 = of(10).pipe(
+      tap(x => console.log('obs2')),
+      delay(3000));
+
     const example$ = of(
-      timer(1000),
-      timer(2000),
-      timer(3000),
+      source1,
+      source2
+      // timer(1000),
+      // timer(2000),
+      // timer(3000),
     ).pipe(concatAll()); // observable subscribe and next..., observable subscribe and next...
 
     const subscribe = example$.subscribe(

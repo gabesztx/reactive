@@ -46,7 +46,9 @@ export class CombineAllComponent implements OnInit {
       // output: Array[3, 30, 200]
       source3$
       // output: Array[3, 30, 300]
-    ).pipe(combineAll());
+    ).pipe(
+      combineAll()
+    );
     // when source1$, source2$, source3$ loaded then subscribe
     // compelted()
 

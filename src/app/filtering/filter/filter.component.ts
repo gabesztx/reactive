@@ -17,8 +17,8 @@ export class FilterComponent implements OnInit {
     const source$ = interval(250);
     const example$ = source$.pipe(
       tap(x => console.log('filter before: ', x)),
-      filter(num => num > 5), // if true then return and subscribe
-      take(1), // when num > 5 unsubscibe
+      filter(num => num > 5), // after 5 num next()
+      take(1), // when num > 5 then complete()
     );
 
     const subscribe = example$.subscribe(

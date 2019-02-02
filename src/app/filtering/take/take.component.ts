@@ -14,13 +14,11 @@ export class TakeComponent implements OnInit {
   ngOnInit() {
     // const source = from([1, 5, 10, 15, 20]);
     // const source = of(1, 5, 10, 15, 20);
-    const interval$ = interval(50);
-    const example = interval$.pipe(take(5)); // interval output: 0,1,2 and done
-    const subscribe = example.subscribe(
+    const interval$ = interval(1000);
+    const example$ = interval$.pipe(take(5)); // when 5 trigger interval then complete()
+
+    const subscribe = example$.subscribe(
       val => {
-        /*if (val === 10) {
-          subscribe.unsubscribe();
-        }*/
         console.log('Value: ', `${val}`);
       },
       err => {

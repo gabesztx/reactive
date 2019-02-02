@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { from, interval } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { filter, take, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-filter',
@@ -9,20 +9,20 @@ import { filter } from 'rxjs/operators';
 })
 export class FilterComponent implements OnInit {
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit() {
-
     // const source = from([1, 2, 3, 4, 5, 8]);
-    const source = interval(500);
-    const example = source.pipe(filter(num => num > 5)); // if true then return
-    const subscribe = example.subscribe(
+    const source$ = interval(1000).pipe(take(10));
+    const example$ = source$.pipe(
+      // tap(x => console.log('filter before: ', x)),
+      filter(num => num > 5), // if true then return
+      tap(x => console.log('filter after: ', x)),
+    );
+
+    const subscribe = example$.subscribe(
       val => {
-        if (val === 10) {
-          subscribe.unsubscribe();
-        }
-        console.log('Value: ', `${val}`);
+        console.log('Emit value: ', `${val}`);
       },
       err => {
         console.log('Error: ', err);

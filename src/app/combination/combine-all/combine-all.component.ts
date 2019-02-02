@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { interval, of, timer } from 'rxjs';
-import { take, delay, tap, map, combineAll, concatAll } from 'rxjs/operators';
+import { combineLatest, interval, of, timer } from 'rxjs';
+import { take, delay, tap, map, combineAll } from 'rxjs/operators';
 
 @Component({
   selector: 'app-combine-all',
@@ -20,20 +20,21 @@ export class CombineAllComponent implements OnInit {
     const example$ = of(source1, source2, source3).pipe(combineAll());
     */
 
-    const source1 = of(1).pipe(
+    const source1$ = of(1, 2, 3).pipe(
       tap(x => console.log('obs1')),
       delay(1000));
-    const source2 = of(10).pipe(
+    const source2$ = of(10, 20, 30).pipe(
       tap(x => console.log('obs2')),
-      delay(3000));
+      delay(1000));
+    const source3$ = of(100, 200, 300).pipe(
+      tap(x => console.log('obs3')),
+      delay(1000));
 
-    const example$ = of(source1, source2
-      // timer(1000).pipe(tap(x => console.log('obs1'))),
-      // timer(2000).pipe(tap(x => console.log('obs2'))),
-      // timer(5000).pipe(tap(x => console.log('obs3'))),
-      // timer(2000),
-      // timer(3000),
-    ).pipe(combineAll()); // run all observable and when finished all, subscribe and return (Array)
+    const example$ = of(
+      source1$,
+      source2$,
+      source3$
+    ).pipe(combineAll());
 
     const subscribe = example$.subscribe(
       val => {
@@ -48,7 +49,3 @@ export class CombineAllComponent implements OnInit {
   }
 
 }
-
-/*
-  emit variable amount of values in a sequence and then emits a complete notification.
-*/

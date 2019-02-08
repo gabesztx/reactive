@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { fromEvent } from 'rxjs';
-import { map, mapTo, tap } from 'rxjs/operators';
+import { fromEvent, merge, of } from 'rxjs';
+import { filter, map, mapTo, share, take, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-ifelse',
@@ -15,12 +15,24 @@ export class IfelseComponent implements OnInit {
   ngOnInit() {
 
     const click$ = fromEvent(document, 'click').pipe(
-      map(() => Math.random() * 10),
-      tap(num => console.log('Click value: ', num))
+      tap(num => console.log('click')),
+      map(() => parseInt(`${Math.random() * 10}`, 10)),
+      share()
     );
 
-    // const
-    const subscribe = click$.subscribe(
+    /* if num > 5 */
+    const ifSource$ = click$.pipe(
+      filter(num => num > 5),
+      tap(num => console.log('Nagyobb')),
+    );
+
+    /* else num < 5 */
+    const elseSource$ = click$.pipe(
+      filter(num => num < 5),
+      tap(num => console.log('Kisebb'))
+    );
+    const example$ = merge(ifSource$, elseSource$);
+    const subscribe = example$.subscribe(
       val => {
         console.log('Emit value: ', val);
       },
@@ -31,5 +43,4 @@ export class IfelseComponent implements OnInit {
         console.log('Completed!');
       });
   }
-
 }

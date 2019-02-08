@@ -28,11 +28,6 @@ export class ShareComponent implements OnInit {
      **DONE0**
      **DONE1**
      **DONE2**
-     **DONE3**
-     **SIDE EFFECT**
-     **DONE0**
-     **DONE1**
-     **DONE2**
      **DONE3**/
 
     /*const timer$ = interval(1000).pipe(
@@ -42,7 +37,6 @@ export class ShareComponent implements OnInit {
     );*/
 
     const source$ = timer(1000);
-
     const example$ = source$.pipe(
       tap(() => console.log('***SIDE EFFECT***')),
       mapTo('***RESULT***'),

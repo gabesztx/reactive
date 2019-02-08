@@ -13,13 +13,13 @@ export class TakeUntilComponent implements OnInit {
   }
 
   ngOnInit() {
-    /*
-    const source$ = interval(1000);
-    const clicks$ = fromEvent(document, 'click');
+    const source$ = interval(1000).pipe(take(5));
+    const clicks$ = fromEvent(document, 'click').pipe(
+      tap(x => console.log('Click!')),
+    );
     const example$ = source$.pipe(
       takeUntil(clicks$),
     );
-    */
 
     /*
     const source$ = timer(0, 1000);
@@ -32,38 +32,38 @@ export class TakeUntilComponent implements OnInit {
     */
 
     // source$ interval loop, then sourceUntil$ will completed
-/*
-    const source1$ = of(1, 2, 3).pipe(
-      tap(x => console.log('obs1')),
-      delay(1000),
-      tap(x => console.log('obs1 done')),
-    );
-    const source2$ = of(10, 20, 30).pipe(
-      tap(x => console.log('obs2')),
-      delay(1000),
-      tap(x => console.log('obs2 done')),
-      // take(1),
-    );
-    const source3$ = of(100).pipe(
-      tap(x => console.log('obs3')),
-      delay(1000),
-      tap(x => console.log('obs3 done')),
-      // take(1),
-    );
+    /*
+        const source1$ = of(1, 2, 3).pipe(
+          tap(x => console.log('obs1')),
+          delay(1000),
+          tap(x => console.log('obs1 done')),
+        );
+        const source2$ = of(10, 20, 30).pipe(
+          tap(x => console.log('obs2')),
+          delay(1000),
+          tap(x => console.log('obs2 done')),
+          // take(1),
+        );
+        const source3$ = of(100).pipe(
+          tap(x => console.log('obs3')),
+          delay(1000),
+          tap(x => console.log('obs3 done')),
+          // take(1),
+        );
 
-    const takeUntilSource$ = of(
-      source1$,
-      source2$,
-      source3$
-    ).pipe(
-      // tap(x => console.log('value', x)),
-      combineAll(),
-      // tap(x => console.log('combineAll', x)),
-    );*/
+        const takeUntilSource$ = of(
+          source1$,
+          source2$,
+          source3$
+        ).pipe(
+          // tap(x => console.log('value', x)),
+          combineAll(),
+          // tap(x => console.log('combineAll', x)),
+        );*/
 
-    const example$ = interval(1000).pipe(
-      takeUntil(timer(3000)),
-    );
+    /*  const example$ = interval(1000).pipe(
+        takeUntil(timer(3000)),
+      );*/
 
 
     const subscribe = example$.subscribe(

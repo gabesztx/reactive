@@ -21,11 +21,11 @@ export class MapComponent implements OnInit {
       {name: 'Ryan', age: 50}
     ]);
 
-    const example = source.pipe(map(({name}) => name));
+    const example = source.pipe(map(({name, age}) => age));
 
     const subscribe = example.subscribe(
       val => {
-        console.log('Value: ', val);
+        console.log('Emit: ', val);
       },
       err => {
         console.log('Error: ', err);

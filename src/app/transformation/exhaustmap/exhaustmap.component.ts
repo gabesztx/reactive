@@ -49,7 +49,7 @@ export class ExhaustmapComponent implements OnInit {
 
     const subscribe = example$.subscribe(
       val => {
-        console.log('Emitted Valu: ', val);
+        console.log('Emit Valu: ', val);
       },
       err => {
         console.log('Error: ', err);

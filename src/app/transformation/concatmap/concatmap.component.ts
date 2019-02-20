@@ -14,23 +14,11 @@ export class ConcatmapComponent implements OnInit {
   }
 
   ngOnInit() {
-
     const source$ = of(2000, 4000, 1000, 3000);
     const example$ = source$.pipe(
       tap(x => console.log('source values: ', x)),
       concatMap(val => of(val).pipe(delay(val)))
     );
-    // output: 2000 next() 4000 next() 1000 next() 3000 completed()
-
-
-    /*const clickEvent$ = fromEvent(document, 'click');
-    const source2$ = interval(1000);
-    const example$ = clickEvent$.pipe(
-      // take(1),
-      tap(x => console.log('click')),
-      concatMap(val => source2$.pipe(take(5)))
-    );*/
-
     const subscribe = example$.subscribe(
       val => {
         console.log('Emitted valu: ', val);
@@ -42,7 +30,6 @@ export class ConcatmapComponent implements OnInit {
         console.log('Completed!');
       });
   }
-
 }
 
 /*
@@ -52,3 +39,15 @@ export class ConcatmapComponent implements OnInit {
  - used: ha fontos a lefutási - visszatérési sorrend
 */
 
+
+
+// output: 2000 next() 4000 next() 1000 next() 3000 completed()
+
+
+/*const clickEvent$ = fromEvent(document, 'click');
+const source2$ = interval(1000);
+const example$ = clickEvent$.pipe(
+  // take(1),
+  tap(x => console.log('click')),
+  concatMap(val => source2$.pipe(take(5)))
+);*/

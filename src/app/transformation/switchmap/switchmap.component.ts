@@ -62,7 +62,8 @@ export class SwitchmapComponent implements OnInit {
     const example$ = source$.pipe(
       tap(x => console.log('source values: ', x)),
       switchMap(val => of(val).pipe(delay(val)))
-    );*/
+    );
+    */
     // output: 3000 completed()
 
     const subscribe = example$.subscribe(
@@ -113,3 +114,6 @@ export class SwitchmapComponent implements OnInit {
 */
 
 
+/*
+* ha több switchmap van és meg akarjuk őrizni az állapotokat, akkor switch map kapott előző eredményt egy tömbe pusholjuk és adjuk tövább a next observableba
+*/

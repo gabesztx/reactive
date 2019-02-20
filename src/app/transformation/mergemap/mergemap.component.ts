@@ -34,7 +34,7 @@ export class MergemapComponent implements OnInit {
 
     const subscribe = example$.subscribe(
       val => {
-        console.log('Emitted valu: ', val);
+        console.log('Emit valu: ', val);
       },
       err => {
         console.log('Error: ', err);

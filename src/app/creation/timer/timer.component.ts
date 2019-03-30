@@ -30,5 +30,4 @@ export class TimerComponent implements OnInit {
         console.log('Completed!');
       });
   }
-
 }

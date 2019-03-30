@@ -24,15 +24,15 @@ export class MergemapComponent implements OnInit {
     */
 
 
-    const clickEvent$ = fromEvent(document, 'click');
+    /*const clickEvent$ = fromEvent(document, 'click');
     const source2$ = interval(1000);
     const example$ = clickEvent$.pipe(
       // take(1),
       tap(x => console.log('click')),
       mergeMap(val => source2$.pipe(take(5)))
     );
-
-    const subscribe = example$.subscribe(
+*/
+  /*  const subscribe = example$.subscribe(
       val => {
         console.log('Emit valu: ', val);
       },
@@ -41,7 +41,7 @@ export class MergemapComponent implements OnInit {
       },
       () => {
         console.log('Completed!');
-      });
+      });*/
 
 
     /*

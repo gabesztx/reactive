@@ -15,7 +15,7 @@ export class SwitchmapComponent implements OnInit {
   }
 
   ngOnInit() {
-    /*const source = of([0, 1, 2, 3, 4]).pipe(
+ /*   const source = of([0, 1, 2, 3, 4]).pipe(
       tap(x => console.log('of value: ', x)),
       switchMap(val => {
         // console.log(val);
@@ -29,41 +29,42 @@ export class SwitchmapComponent implements OnInit {
        switchMap(() => interval(1000))
      );*/
 
-    /*const source = fromEvent(document, 'click').pipe(
-      switchMap(() => of(3000, 1000, 4000))
+    const source = fromEvent(document, 'click').pipe(
+      // switchMap(() => of(3000, 1000, 1000))
+      switchMap(() => of(1000))
     );
-    const example = source.pipe(
-      tap(x => console.log('click', x)),
-      concatMap(val => {
-      // switchMap(val => {
+    const example$ = source.pipe(
+      // tap(x => console.log('click', x)),
+      // concatMap(val => {
+      switchMap(val => {
       // mergeMap(val => {
-        return timer(0, 1000).pipe(
+        return timer(1000).pipe(
           delay(val),
           map(value => {
             console.log('Value', val);
-            return value
+            return value;
           }),
           take(3)
         );
       })
-    );*/
+    );
 
 
-    const clickEvent$ = fromEvent(document, 'click');
+  /*  const clickEvent$ = fromEvent(document, 'click');
     const source2$ = interval(1000);
     const example$ = clickEvent$.pipe(
       // take(1),
       tap(x => console.log('click')),
       switchMap(val => source2$.pipe(take(5)))
-    );
+    );*/
 
 
-    /*const source$ = of(2000, 4000, 1000, 3000);
+  /*  const source$ = of(2000, 4000, 1000, 3000);
     const example$ = source$.pipe(
       tap(x => console.log('source values: ', x)),
       switchMap(val => of(val).pipe(delay(val)))
-    );
-    */
+      // mergeMap(val => of(val).pipe(delay(val)))
+    );*/
     // output: 3000 completed()
 
     const subscribe = example$.subscribe(

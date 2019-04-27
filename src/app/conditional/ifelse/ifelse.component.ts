@@ -42,5 +42,22 @@ export class IfelseComponent implements OnInit {
       () => {
         console.log('Completed!');
       });
+
+
+    const somethings$ = of('SomeThings')
+      .pipe(
+        filter(val => false),
+        // tap(x => console.log('Log: somethings$', x))
+      );
+    const betterThings$ = of('BetterThings')
+      .pipe(
+        filter(val => false),
+        // tap(x => console.log('Log: betterThings$', x))
+      );
+
+    const source$ = merge(somethings$, betterThings$);
+    source$.subscribe((res) => {
+      console.log('Emit', res);
+    });
   }
 }

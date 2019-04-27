@@ -23,7 +23,7 @@ export class SequenceEqualComponent implements OnInit {
           from(keyDowns)
             .pipe(
               tap(v => console.log('KeyDodwns:', v)),
-              sequenceEqual(expectedSequence),
+              sequenceEqual(expectedSequence), // kapott értékeket össze hasonlitja az eredetivel és ha egyenlú akkor true
               // tap(isItQwerty => console.log('Log 2', isItQwerty ? 'WELL DONE!' : 'TYPE AGAIN!'))
             )
         )

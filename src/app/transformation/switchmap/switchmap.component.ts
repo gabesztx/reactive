@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, interval, from, timer, of, fromEvent } from 'rxjs';
-import { map, switchMap, tap, take, delay, mapTo, mergeMap, concatMap } from 'rxjs/operators';
+import { map, switchMap, tap, take, delay, mapTo, mergeMap, concatMap, flatMap } from 'rxjs/operators';
 
 // import { mapTo } from 'rxjs-compat/operator/mapTo';
 
@@ -15,26 +15,26 @@ export class SwitchmapComponent implements OnInit {
   }
 
   ngOnInit() {
- /*   const source = of([0, 1, 2, 3, 4]).pipe(
-      tap(x => console.log('of value: ', x)),
-      switchMap(val => {
-        // console.log(val);
-        return from(val).pipe(take(2));
-      }),
-      tap(x => console.log('from value: ', x)),
-    );*/
+    /*   const source = of([0, 1, 2, 3, 4]).pipe(
+         tap(x => console.log('of value: ', x)),
+         switchMap(val => {
+           // console.log(val);
+           return from(val).pipe(take(2));
+         }),
+         tap(x => console.log('from value: ', x)),
+       );*/
 
     /* const source = timer(0, 3000);
      const example = source.pipe(
        switchMap(() => interval(1000))
      );*/
 
-    const source = fromEvent(document, 'click').pipe(
+    /*const source = fromEvent(document, 'click').pipe(
       // switchMap(() => of(3000, 1000, 1000))
       switchMap(() => of(1000))
     );
     const example$ = source.pipe(
-      // tap(x => console.log('click', x)),
+      tap(x => console.log('click', x)),
       // concatMap(val => {
       switchMap(val => {
       // mergeMap(val => {
@@ -47,36 +47,26 @@ export class SwitchmapComponent implements OnInit {
           take(3)
         );
       })
-    );
-
-
-  /*  const clickEvent$ = fromEvent(document, 'click');
-    const source2$ = interval(1000);
-    const example$ = clickEvent$.pipe(
-      // take(1),
-      tap(x => console.log('click')),
-      switchMap(val => source2$.pipe(take(5)))
     );*/
 
 
-  /*  const source$ = of(2000, 4000, 1000, 3000);
-    const example$ = source$.pipe(
-      tap(x => console.log('source values: ', x)),
-      switchMap(val => of(val).pipe(delay(val)))
-      // mergeMap(val => of(val).pipe(delay(val)))
-    );*/
+    /*  const clickEvent$ = fromEvent(document, 'click');
+      const source2$ = interval(1000);
+      const example$ = clickEvent$.pipe(
+        // take(1),
+        tap(x => console.log('click')),
+        switchMap(val => source2$.pipe(take(5)))
+      );*/
+
+
+    /*  const source$ = of(2000, 4000, 1000, 3000);
+      const example$ = source$.pipe(
+        tap(x => console.log('source values: ', x)),
+        switchMap(val => of(val).pipe(delay(val)))
+        // mergeMap(val => of(val).pipe(delay(val)))
+      );*/
     // output: 3000 completed()
 
-    const subscribe = example$.subscribe(
-      val => {
-        console.log('Emitted Valu: ', val);
-      },
-      err => {
-        console.log('Error: ', err);
-      },
-      () => {
-        console.log('Completed!');
-      });
 
     /*
     const character$ = Observable.create(obs => {
@@ -100,6 +90,44 @@ export class SwitchmapComponent implements OnInit {
         console.log('Completed!');
       });
       */
+
+    // const iteral$ = timer(0, 500).pipe(
+    //   tap(x => console.log('LOG: ', x)),
+    //   take(5)
+    // );
+    const charecter$ = new Observable(obs => {
+      // setTimeout(() => {});
+      setTimeout(() => {
+        obs.next('A');
+      }, 500);
+      setTimeout(() => {
+        obs.next('B');
+        // obs.next('c');
+      }, 1000);
+      // obs.complete();
+      // obs.complete();
+    }).pipe(
+
+      // flatMap(value => {
+      switchMap(value => {
+        return timer(0, 500).pipe(
+          // tap(x => console.log('LOG: ', x)),
+          map(number => `${value} : ${number}`),
+          take(3)
+        );
+      })
+    );
+
+    const subscribe = charecter$.subscribe(
+      val => {
+        console.log('Emitted Valu: ', val);
+      },
+      err => {
+        console.log('Error: ', err);
+      },
+      () => {
+        console.log('Completed!');
+      });
   }
 }
 

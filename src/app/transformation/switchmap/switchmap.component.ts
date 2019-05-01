@@ -105,7 +105,6 @@ export class SwitchmapComponent implements OnInit {
         // obs.next('c');
       }, 1000);
       // obs.complete();
-      // obs.complete();
     }).pipe(
 
       // flatMap(value => {

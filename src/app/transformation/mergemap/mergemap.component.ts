@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { fromEvent, interval, of, timer } from 'rxjs';
-import { switchMap, mergeMap, tap, mapTo, take, map, concatMap, delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-mergemap',

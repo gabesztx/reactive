@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, interval, from, timer, of, fromEvent } from 'rxjs';
-import { map, switchMap, tap, take, delay, mapTo, mergeMap, concatMap, flatMap } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
 
 // import { mapTo } from 'rxjs-compat/operator/mapTo';
 
@@ -15,14 +15,35 @@ export class SwitchmapComponent implements OnInit {
   }
 
   ngOnInit() {
-    /*   const source = of([0, 1, 2, 3, 4]).pipe(
-         tap(x => console.log('of value: ', x)),
-         switchMap(val => {
-           // console.log(val);
-           return from(val).pipe(take(2));
-         }),
-         tap(x => console.log('from value: ', x)),
-       );*/
+    const source = of([1, 2, 3, 5]).pipe(
+      mergeMap((array) => {
+        const newArray = array.reduce((acc, curr) => {
+          return acc + curr;
+        });
+        return of([newArray, ...array]);
+      })
+    );
+    // tap(x => console.log('of value: ', x)),
+
+    const subscribe = source.subscribe(
+      val => {
+        console.log('Emitted Valu: ', val);
+      },
+      err => {
+        console.log('Error: ', err);
+      },
+      () => {
+        // console.log('Completed!');
+      });
+
+    /*const source = of([0, 1, 2, 3, 4]).pipe(
+      // tap(x => console.log('of value: ', x)),
+      switchMap(val => {
+        return val;
+      }),
+      // tap(x => console.log('from value: ', x)),
+    );*/
+
 
     /* const source = timer(0, 3000);
      const example = source.pipe(
@@ -47,7 +68,18 @@ export class SwitchmapComponent implements OnInit {
           take(3)
         );
       })
-    );*/
+    );
+
+    const subscribe = example$.subscribe(
+      val => {
+        console.log('Emitted Valu: ', val);
+      },
+      err => {
+        console.log('Error: ', err);
+      },
+      () => {
+        console.log('Completed!');
+      });*/
 
 
     /*  const clickEvent$ = fromEvent(document, 'click');
@@ -59,12 +91,23 @@ export class SwitchmapComponent implements OnInit {
       );*/
 
 
-    /*  const source$ = of(2000, 4000, 1000, 3000);
-      const example$ = source$.pipe(
-        tap(x => console.log('source values: ', x)),
-        switchMap(val => of(val).pipe(delay(val)))
-        // mergeMap(val => of(val).pipe(delay(val)))
-      );*/
+    /*const source$ = of(2000, 4000, 1000, 3000);
+    const example$ = source$.pipe(
+      tap(x => console.log('source values: ', x)),
+      switchMap(val => of(val).pipe(delay(val)))
+      // mergeMap(val => of(val).pipe(delay(val)))
+    );*/
+
+    /*const subscribe = source$.subscribe(
+      val => {
+        console.log('Emitted Valu: ', val);
+      },
+      err => {
+        console.log('Error: ', err);
+      },
+      () => {
+        console.log('Completed!');
+      });*/
     // output: 3000 completed()
 
 
@@ -95,7 +138,7 @@ export class SwitchmapComponent implements OnInit {
     //   tap(x => console.log('LOG: ', x)),
     //   take(5)
     // );
-    const charecter$ = new Observable(obs => {
+    /*const charecter$ = new Observable(obs => {
       // setTimeout(() => {});
       setTimeout(() => {
         obs.next('A');
@@ -126,7 +169,7 @@ export class SwitchmapComponent implements OnInit {
       },
       () => {
         console.log('Completed!');
-      });
+      });*/
   }
 }
 

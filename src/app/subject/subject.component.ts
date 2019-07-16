@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, Subscription, Subject } from 'rxjs';
+import { BehaviorSubject, Subscription, Subject, ReplaySubject } from 'rxjs';
+import { map, mapTo, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-subject',
@@ -12,31 +13,54 @@ export class SubjectComponent implements OnInit {
   }
 
   ngOnInit() {
-    const subject: Subject<any> = new Subject();
-    // const subject: BehaviorSubject<any> = new BehaviorSubject('first value');
+    /* SUBJECT */
 
-    // subject.subscribe((data) => {
-    //   console.log('Subscriber A:', data);
-    // });
+    /*
+    const mySubject = new Subject();
+     const subscription1 = mySubject.subscribe(x => {
+       console.log('From subscription 1:', x);
+     });
+     mySubject.next(1);
+     const subscription2 = mySubject.subscribe(x => {
+       console.log('From subscription 2:', x);
+     });
+     mySubject.next(2);
+     */
 
-    const subscription: Subscription = subject.subscribe(
-      value => {
-        console.log('Value: ', value);
-      },
-      value => {
-        console.log('Error: ', value);
-      },
-      () => {
-        console.log('Completed!');
-        // console.log('VALUE', subject);
-        // subscription.unsubscribe();
-      }
-    );
+    /* AS OBSERVABLE */
+    // TODO: asObservable
 
-    subject.next(Math.random());
-    subject.next(Math.random());
-    subject.complete();
+    /* REPLAY SUBJECT */
 
+    /*
+    // const mySubject = new Subject();
+    const mySubject = new ReplaySubject(1); // next is emit before subscribe
+    // bufferSize = 1 - only last (4) mySubject next
+    mySubject.next(1);
+    mySubject.next(2);
+    mySubject.next(3);
+    mySubject.next(4);
+
+    const subscription1 = mySubject.subscribe(x => {
+      console.log('From subscription 1:', x);
+    });
+    const subscription2 = mySubject.subscribe(x => {
+      console.log('From subscription 2:', x);
+    });
+    */
+
+
+    /* BEHAVIOR SUBJECT */
+
+    /*
+    const mySubject = new BehaviorSubject(0);
+    // if not have emit next before subscribe, then trigger BehaviorSubject value
+    // mySubject.next(1);
+    const subscription1 = mySubject.subscribe(x => {
+      console.log('From subscription 1:', x);
+    });
+    mySubject.next(2);
+    */
 
     /*
     setTimeout(() => {

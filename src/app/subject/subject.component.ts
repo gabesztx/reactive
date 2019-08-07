@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, Subscription, Subject, ReplaySubject } from 'rxjs';
-import { map, mapTo, tap } from 'rxjs/operators';
+import { BehaviorSubject, Subscription, Subject, ReplaySubject, of, combineLatest } from 'rxjs';
+import { map, mapTo, tap, concatAll, delay, combineAll } from 'rxjs/operators';
+import { concat } from 'rxjs-compat/operator/concat';
+
+// import { combineLatest } from 'rxjs-compat/operator/combineLatest';
 
 @Component({
   selector: 'app-subject',
@@ -15,39 +18,54 @@ export class SubjectComponent implements OnInit {
   ngOnInit() {
     /* SUBJECT */
 
-    /*
-    const mySubject = new Subject();
-     const subscription1 = mySubject.subscribe(x => {
-       console.log('From subscription 1:', x);
-     });
-     mySubject.next(1);
-     const subscription2 = mySubject.subscribe(x => {
-       console.log('From subscription 2:', x);
-     });
-     mySubject.next(2);
-     */
+    /*const mySubject = new Subject();
+    const subscription1 = mySubject.subscribe(x => {
+      console.log('From subscription 1:', x);
+    });
+    mySubject.next(1);
+    const subscription2 = mySubject.subscribe(x => {
+      console.log('From subscription 2:', x);
+    });
+    mySubject.next(2);*/
 
     /* AS OBSERVABLE */
     // TODO: asObservable
 
     /* REPLAY SUBJECT */
 
-    /*
     // const mySubject = new Subject();
-    const mySubject = new ReplaySubject(1); // next is emit before subscribe
+    const sub1 = new ReplaySubject(1); // next is emit before subscribe
+    // const sub2 = new ReplaySubject(1); // next is emit before subscribe
+    // const subscription =
     // bufferSize = 1 - only last (4) mySubject next
-    mySubject.next(1);
-    mySubject.next(2);
-    mySubject.next(3);
-    mySubject.next(4);
 
-    const subscription1 = mySubject.subscribe(x => {
-      console.log('From subscription 1:', x);
-    });
-    const subscription2 = mySubject.subscribe(x => {
-      console.log('From subscription 2:', x);
-    });
-    */
+    // mySubject.next(2);
+    // mySubject.next(2);
+    // mySubject.next(3);
+    // mySubject.next(4);
+
+    const source1$ = of(1, 2, 3);
+    // const source2$ = of(4, 5, 6);
+    // const source3$ = of(7, 8, 9);
+    // const source3$ = of(100, 200, 300);
+
+    // const word$ = of('world');
+    // const example$ = of(source1$, source2$).pipe(combineAll());
+    // const
+    // const source = combineLatest(source1$, source2$).pipe();
+    // const source = of(source1$, source2$, source3$).pipe(combineAll());
+    // combineLatest(source1$, source2$, source3$)
+    // .pipe(combineAll())
+    /*combineLatest(source1$)
+      .subscribe(x => {
+        console.log('emit: ', x);
+      });*/
+
+    // mySubject.next(1);
+
+    // const subscription2 = mySubject.subscribe(x => {
+    //   console.log('From subscription 2:', x);
+    // });
 
 
     /* BEHAVIOR SUBJECT */
@@ -74,5 +92,4 @@ export class SubjectComponent implements OnInit {
     }, 3500);
     */
   }
-
 }

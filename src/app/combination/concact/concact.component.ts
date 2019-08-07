@@ -14,10 +14,9 @@ export class ConcactComponent implements OnInit {
 
   ngOnInit() {
     const source1$ = of(1, 2, 3);
-    const source2$ = of(4, 5, 6);
+    const source2$ = of(4, 5, 6).pipe(delay(3000));
     const source3$ = of(7, 8, 9);
-    // const source4$ = of(10, 11, 12);
-    const source4$ = of(10, 11, 12).pipe(delay(3000));
+    const source4$ = of(10, 11, 12);
     const example$ = concat(source1$, source2$, source3$, source4$);
     const subscribe = example$.subscribe(
       val => {

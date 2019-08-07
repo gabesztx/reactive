@@ -13,7 +13,47 @@ export class CombineLatestComponent implements OnInit {
   }
 
   ngOnInit() {
-    const timerOne = timer(1000, 4000);
+    const source1$ = of(1, 2, 3).pipe(
+      tap(x => console.log('obs1 start')),
+      delay(1000),
+      // tap(x => console.log('obs1 done')),
+    );
+    const source2$ = of(10, 20, 30).pipe(
+      tap(x => console.log('obs2 start')),
+      delay(3000),
+      // tap(x => console.log('obs2 done')),
+      // take(1),
+    );
+    const source3$ = of(100, 200, 300).pipe(
+      tap(x => console.log('obs3 start')),
+      delay(2000),
+      // tap(x => console.log('obs3 done')),
+      // take(1),
+    );
+
+    // asynchron method
+    const example$ = of(
+      source1$,
+      // output: Array[3, 30, 100]
+      source2$,
+      // output: Array[3, 30, 200]
+      // source3$
+      // output: Array[3, 30, 300]
+    ).pipe(
+      combineAll()
+    );
+
+    const subscribe = example$.subscribe(
+      val => {
+        console.log('Emit value: ', val);
+      },
+      err => {
+        console.log('Error: ', err);
+      },
+      () => {
+        console.log('Completed!');
+      })
+    /*const timerOne = timer(1000, 4000);
     const timerTwo = timer(2000, 4000);
     const timerThree = timer(3000, 4000);
 
@@ -26,7 +66,7 @@ export class CombineLatestComponent implements OnInit {
       },
       () => {
         console.log('Completed!');
-      });
+      });*/
 
     // const source1$ = of(1, 2, 3);
     // const source2$ = of(10, 20, 30);

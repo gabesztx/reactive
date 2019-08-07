@@ -22,19 +22,19 @@ export class CombineAllComponent implements OnInit {
 
     const source1$ = of(1, 2, 3).pipe(
       tap(x => console.log('obs1 start')),
-      delay(2000),
-      tap(x => console.log('obs1 done')),
+      delay(1000),
+      // tap(x => console.log('obs1 done')),
     );
     const source2$ = of(10, 20, 30).pipe(
       tap(x => console.log('obs2 start')),
       delay(3000),
-      tap(x => console.log('obs2 done')),
+      // tap(x => console.log('obs2 done')),
       // take(1),
     );
-    const source3$ = of(100, 200, 300, 400).pipe(
+    const source3$ = of(100, 200, 300).pipe(
       tap(x => console.log('obs3 start')),
-      delay(5000),
-      tap(x => console.log('obs3 done')),
+      delay(2000),
+      // tap(x => console.log('obs3 done')),
       // take(1),
     );
 

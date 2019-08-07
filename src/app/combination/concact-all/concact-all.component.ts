@@ -40,9 +40,9 @@ export class ConcactAllComponent implements OnInit {
     const source2$ = of(10, 20, 30).pipe(
       tap(x => console.log('obs2')),
       delay(3000));
-    const source3$ = of(100, 200, 300).pipe(
-      tap(x => console.log('obs3')),
-      delay(5000));
+    /* const source3$ = of(100, 200, 300).pipe(
+       tap(x => console.log('obs3')),
+       delay(5000));*/
 
     // synchron method
     const example$ = of(
@@ -52,7 +52,7 @@ export class ConcactAllComponent implements OnInit {
       source2$,
       // when 10,20,30 completed then subscribe and next()
       // output: 10, 20, 30
-      source3$,
+      // source3$,
       // when 100,200,300 completed then subscribe and next() and finished
       // output: 100, 200, 300
       // complete()

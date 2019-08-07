@@ -9,7 +9,7 @@ import { Observable, of, Subject, Subscription } from 'rxjs';
 export class BasicObsComponent implements OnInit {
   sourceHotData$: Observable<number>;
   sourceColdData$: Subject<number>;
-  subscription: Subscription;
+  // subscription: Subscription;
 
   constructor() {
   }

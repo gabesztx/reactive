@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-// import { AppRoutingModule } from './app-routing.module';
 import { StarterModule } from './starter/starter.module';
 import { CombinationModule } from './combination/combination.module';
 import { ConditionalModule } from './conditional/conditional.module';
@@ -12,6 +11,7 @@ import { UtilityModule } from './utility/utility.module';
 import { MulticastingModule } from './multicasting/multicasting.module';
 import { SubjectModule } from './subject/subject.module';
 import { AppComponent } from './app.component';
+import { EricssonModule } from './ericsson/ericsson.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,6 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    // AppRoutingModule,
     StarterModule,
     CombinationModule,
     ConditionalModule,
@@ -30,8 +29,10 @@ import { AppComponent } from './app.component';
     UtilityModule,
     MulticastingModule,
     SubjectModule,
+    EricssonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

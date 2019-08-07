@@ -10,6 +10,7 @@ export class CombinationComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
 
 }

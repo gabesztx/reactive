@@ -14,45 +14,30 @@ export class CombineLatestComponent implements OnInit {
 
   ngOnInit() {
 
-    // timerOne emits first value at 1s, then once every 4s
-    const s1$ = timer(1000, 4000)
+    /*const s1$ = timer(1000, 3000)
       .pipe(
         tap(x => console.log('s1$ start')),
       );
-    // timerTwo emits first value at 2s, then once every 4s
-    const s2$ = timer(2000, 4000)
+    const s2$ = timer(3000, 3000)
       .pipe(
         tap(x => console.log('s2$ start')),
       );
-    // timerThree emits first value at 3s, then once every 4s
-    // const timerThree$ = timer(3000, 4000);
+    const s3$ = timer(5000, 3000)
+      .pipe(
+        tap(x => console.log('s3$ start')),
+      );
 
     // when one timer emits, emit the latest values from each timer as an array
-    combineLatest(s1$, s2$).subscribe(
-      ([s1, s2]) => {
-        /*
-          Example:
-        timerOne first tick: 'Timer One Latest: 1, Timer Two Latest:0, Timer Three Latest: 0
-        timerTwo first tick: 'Timer One Latest: 1, Timer Two Latest:1, Timer Three Latest: 0
-        timerThree first tick: 'Timer One Latest: 1, Timer Two Latest:1, Timer Three Latest: 1
-      */
-        console.log(`Timer One Latest: ${s1}, Timer Two Latest: ${s2}`);
+    const source = combineLatest(s1$, s2$, s3$);
+    source.subscribe(
+      ([s1, s2, s3]) => {
+        console.log('Emit', s1, s2, s3);
       }
     );
+    // const source = of(s1$, s2$).pipe(combineAll());
+    */
 
-
-    // const source$ = combineLatest(s1$, s2$, s3$)
-    /* const source$ = timerOne$
-       .subscribe(
-         val => {
-           console.log('Emit value: ', val);
-         },
-         err => {
-           console.log('Error: ', err);
-         },
-         () => {
-           console.log('Completed!');
-         });*/
+    // ------------------------------------------------------------------------
 
     /*const s1$ = of(1, 2, 3)
       .pipe(
@@ -78,11 +63,13 @@ export class CombineLatestComponent implements OnInit {
         },
         () => {
           console.log('Completed!');
-        });
+        });*/
 
     // - mivel LATEST ezért az utolsó s3$ databszám alapján fut le és az előtte lévő souce utolso értékt veszi alapul
-    // - ha delay van megvárja az összeset és utána emitál*/
+    // - ha delay van megvárja az összeset és utána emitál
 
+
+    // ------------------------------------------------------------------------
     /**
      EXAMPLE:
      **/

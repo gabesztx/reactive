@@ -10,6 +10,7 @@ import { CombineLatestComponent } from './combine-latest/combine-latest.componen
 import { MergeComponent } from './merge/merge.component';
 import { ForkJoinComponent } from './fork-join/fork-join.component';
 import { ZipComponent } from './zip/zip.component';
+import { EricssonModule } from '../ericsson/ericsson.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ZipComponent } from './zip/zip.component';
     ZipComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    EricssonModule
   ],
   exports: [CombinationComponent],
 })

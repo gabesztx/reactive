@@ -17,12 +17,12 @@ export class CombineLatestComponent implements OnInit {
     // timerOne emits first value at 1s, then once every 4s
     const s1$ = timer(1000, 4000)
       .pipe(
-        tap(x => console.log('s1$ start')),
+        // tap(x => console.log('s1$ start')),
       );
     // timerTwo emits first value at 2s, then once every 4s
     const s2$ = timer(2000, 4000)
       .pipe(
-        tap(x => console.log('s2$ start')),
+        // tap(x => console.log('s2$ start')),
       );
     // timerThree emits first value at 3s, then once every 4s
     // const timerThree$ = timer(3000, 4000);

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, of, ReplaySubject, zip, combineLatest, forkJoin } from 'rxjs';
+import { Observable, of, ReplaySubject, zip, combineLatest, forkJoin, Subscription } from 'rxjs';
 import { combineAll, concatAll, delay, last, map, startWith, tap } from 'rxjs/operators';
 
 interface CardData {
@@ -22,12 +22,13 @@ export class AsyncSubjectComponent implements OnInit {
 
   card$: ReplaySubject<CardData | boolean | string>;
   userData$: ReplaySubject<UserData | string>;
-
-  // allData$: Observable<any>;
+  allData$: Observable<any>;
+  allDataSub: Subscription;
 
   constructor() {
-    // this.card$ = new ReplaySubject();
-    // this.userData$ = new ReplaySubject();
+    this.card$ = new ReplaySubject();
+    this.userData$ = new ReplaySubject();
+    this.allData$ = of(false);
     // this.allData$ = zip(this.card$, this.userData$);
     // this.allData$ = combineLatest(this.card$.pipe(last()), this.userData$.pipe(last()));
     // this.allData$ = combineLatest(this.card$, this.userData$);
@@ -36,67 +37,61 @@ export class AsyncSubjectComponent implements OnInit {
   }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.allData$ = of(true);
+    }, 1000);
+    setTimeout(() => {
+      this.allData$ = of(false);
+    }, 2000);
+    setTimeout(() => {
+      this.allData$ = of(true);
+    }, 3000);
+    /*
     const s1$ = new ReplaySubject();
     const s2$ = new ReplaySubject();
-
-    const source$ = of(s1$, s2$);
-    /*.pipe(
+    const source$ = of(s1$, s2$)
+    .pipe(
       tap(x => console.log('Log: ', x)),
       concatAll(),
     );*/
     // s1$.next('next s1: 1');
     // s1$.next('next s1: 2');
 
-    // tap(x => console.log('LOG source1: ', x)
-    /* const source1$ = of('s1').pipe(
-       tap(x => console.log('s1 Log: ', x)),
-       delay(1000)
-     );
-     const source2$ = of(100).pipe(
-       tap(x => console.log('s2 Log: ', x)),
-       delay(3000)
-     );*/
-    /* const source3$ = of(100, 200, 300).pipe(
-       tap(x => console.log('obs3')),
-       delay(5000));*/
-
-    // const example$ = of(source1$, source2$).pipe(concatAll());
-
-    const subscribe = source$.subscribe(
-      val => {
-        console.log('Emit value: ', val);
-      },
-      err => {
-        console.log('Error: ', err);
-      },
-      () => {
-        console.log('Completed!');
-      });
-    /* this.card$.subscribe(value => {
-       // console.log('card$: ', value);
-     });
-
-     this.userData$.subscribe(value => {
-       // console.log('userValue$: ', value);
-     });*/
-
     /*this.allData$.subscribe(value => {
       console.log('allData$: ', value);
     });
     setTimeout(() => {
       // this.allData$
-    }, 2000);*/
+    }, 2000);
+    */
     // TODO: put subject next() before subcribe and use ReplaySubject(1)
     // TODO: or put subject.complete() and use pipe(last())
 
 
     /** Change spinner in card subject **/
-    /*
-    const cardData = {
+    /*const cardData = {
       title: 'Card Title 1',
       src: 'https://dummyimage.com/100x100/000/fff',
       text: 'This is a very common use of the ngIf/else functionality: we display an alternative.'
     };
+
+    const source1$ = of('s1').pipe(
+      tap(x => console.log('s1 Log: ', x))
+    );
+    const source2$ = of(100).pipe(
+      tap(x => console.log('s2 Log: ', x))
+    );
+
+    const example$ = of(source1$, source2$).pipe(concatAll());
+
+    this.card$.subscribe(value => {
+      console.log('card$: ', value);
+    });
+
+    this.userData$.subscribe(value => {
+      console.log('userValue$: ', value);
+    });
+
     setTimeout(() => {
       this.card$.next(cardData);
     }, 1000);
@@ -106,7 +101,17 @@ export class AsyncSubjectComponent implements OnInit {
     setTimeout(() => {
       this.card$.next(cardData);
     }, 3000);
-    */
+
+    const subscribe = example$.subscribe(
+      val => {
+        console.log('Emit value: ', val);
+      },
+      err => {
+        console.log('Error: ', err);
+      },
+      () => {
+        console.log('Completed!');
+      });*/
   }
 
   updateNext() {

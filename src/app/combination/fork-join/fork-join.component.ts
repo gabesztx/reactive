@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ajax } from 'rxjs/ajax';
-import { forkJoin, interval, of } from 'rxjs';
+import { forkJoin, interval, of, ReplaySubject } from 'rxjs';
 import { delay, take, tap } from 'rxjs/operators';
 
 @Component({
@@ -9,7 +9,8 @@ import { delay, take, tap } from 'rxjs/operators';
   styleUrls: ['./fork-join.component.scss']
 })
 export class ForkJoinComponent implements OnInit {
-
+  source1$: ReplaySubject<any>;
+  source2$: ReplaySubject<any>;
   constructor() {
   }
 
@@ -26,19 +27,21 @@ export class ForkJoinComponent implements OnInit {
     // { google: object, microsoft: object, users: array }
     const example = forkJoin(
       //  emit 'Hello' immediately
-      of('Hello'),
+      of('Hello').pipe(tap(x => console.log('LOG: ', x))),
       //  emit 'World' after 1 second
-      of('World').pipe(delay(1000)),
+      of('World').pipe(delay(1000),
+        tap(x => console.log('LOG: ', x))),
       //  emit 0 after 1 second
       interval(1000).pipe(take(1)),
       //  emit 0...1 in 1 second interval
       // tap(x => console.log('LOG: ,', x)),
-      interval(1000).pipe(take(2)),
-      of('OVER').pipe(delay(500)),
-    )
-    example.subscribe((res) => {
-      console.log('res', res);
-    });
+      // interval(1000).pipe(take(2)),
+      // of('OVER').pipe(delay(500)),
+    );
+    example
+      .subscribe((res) => {
+        console.log('res', res);
+      });
   }
 
 }
